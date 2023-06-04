@@ -2,18 +2,12 @@ class Solution {
     public int solution(String t, String p) {
         int answer = 0;
         
-        int start = 0;
-		int end = p.length();
+        int pLen = p.length();
+		long pVal = Long.parseLong(p);
 		
-		while(end <= t.length()) {
-			long tmp = Long.parseLong(t.substring(start, end));
-			
-			if(tmp <= Long.parseLong(p)) {
-				answer++;
-			}
-			
-			start++;
-			end++;
+		for(int i = 0; i<=t.length() - pLen; i++) {
+			long  tVal = Long.parseLong(t.substring(i, i+pLen));
+			if(tVal <= pVal) answer++;
 		}
         
         return answer;
