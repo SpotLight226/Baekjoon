@@ -10,7 +10,6 @@ FROM book b
     ON b.book_id = s.book_id
 WHERE DATE_FORMAT(sales_date, '%Y-%m') = '2022-01'
 
-GROUP BY b.author_id, category
+GROUP BY b.author_id, category, author_name
 ORDER BY b.author_id
        , category DESC
-       
