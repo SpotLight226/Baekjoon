@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,17 +27,15 @@ public class Main {
 
         Set<String> set = map.keySet();
         ArrayList<String> list = new ArrayList<>();
-        int count = 0;
         for(String key : set){
             int tmp = map.get(key);
             if(tmp == 2){
-                count++;
                 list.add(key);
             }
         }
 
         Collections.sort(list);
-        System.out.println(count);
+        System.out.println(list.size());
         for(int i = 0; i < list.size(); i++){
             System.out.println(list.get(i));
         }
