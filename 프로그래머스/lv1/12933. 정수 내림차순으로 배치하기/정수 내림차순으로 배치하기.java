@@ -1,18 +1,11 @@
-import java.util.Arrays;
-import java.util.Collections;
-
+import java.util.Comparator;
 class Solution {
     public long solution(long n) {
         
-        String[] arr = String.valueOf(n).split("");
-        Arrays.sort(arr, Collections.reverseOrder());
-
-        String answer = "";
-
-        for(String s : arr){
-            answer += s;
-        }
-        
-        return Long.parseLong(answer);
+        String str = Long.toString(n).chars().mapToObj(c -> Character.valueOf((char)c))
+                         .sorted(Comparator.comparingInt(Character::valueOf).reversed())
+                         .collect(StringBuilder::new, StringBuilder::appendCodePoint,
+                                  StringBuilder::append).toString();
+        return Long.parseLong(str);
     }
 }
