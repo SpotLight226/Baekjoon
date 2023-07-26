@@ -1,5 +1,9 @@
 -- 코드를 입력하세요
-SELECT INS.ANIMAL_ID, INS.ANIMAL_TYPE, INS.NAME FROM ANIMAL_INS INS
-  LEFT JOIN ANIMAL_OUTS OUTS
-  ON INS.ANIMAL_ID = OUTS.ANIMAL_ID
-  WHERE sex_upon_intake != sex_upon_outcome;
+SELECT ins.animal_id
+     , ins.animal_type
+     , ins.name
+FROM animal_ins AS ins
+    LEFT JOIN animal_outs AS outs
+    ON ins.animal_id = outs.animal_id
+WHERE outs.animal_id IS NOT NULL
+AND ins.sex_upon_intake <> outs.sex_upon_outcome
