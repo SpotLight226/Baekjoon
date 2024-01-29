@@ -46,6 +46,11 @@ public class Main {
         // 좋은 구간의 개수 계산
         // n - start - 1 : n 과 start 사이 정수 개수
         // end - n - 1 : n 과 end 사이 정수 개수
+        // (n - start- 1) * (end - n - 1) : 겹치는 부분에서의 경우의 수
+        // ex ) start = 2, end = 5 일 때, n이 3이라면
+        // n - start - 1 = 0 => 3보다 작은 정수 없음
+        // end - n - 1 = 1 => 4 말고는 큰 정수 없음
+        // (n - start - 1) * (end - n - 1) = 0 => 겹치는 부분에서 좋은 구간이 없음
         int answer = n - start - 1 + end - n - 1 + (n - start- 1) * (end - n - 1);
         System.out.println(answer);
     }
