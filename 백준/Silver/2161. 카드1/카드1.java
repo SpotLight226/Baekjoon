@@ -6,9 +6,10 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
-
+        
         int n = Integer.parseInt(br.readLine());
-
+        // queue 만 이용
+        // 이게 더 빠름
         Queue<Integer> queue = new LinkedList<>();
 
         for (int i = 1; i <= n; i++) {
