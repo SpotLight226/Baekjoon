@@ -8,41 +8,31 @@ public class Main {
         StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
-
-        Stack<Integer> stack = new Stack<>(); // 수열의 인덱스를 넣을 스택
-        int[] arr = new int[n]; // 숫자 수열
+        // 2개의 배열 이용
+        // 하나는 입력받을 배열, 하나는 결과를 저장할 배열
+        int[] arr = new int[n];
+        int[] res = new int[n];
+        Stack<Integer> stack = new Stack<>();
 
         StringTokenizer st = new StringTokenizer(br.readLine());
-
+        // 입력 받을 배열에는 입력값을 결과 배열에는 -1 을 미리 입력
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
+            res[i] = -1;
         }
 
         for (int i = 0; i < n; i++) {
-
-            // 스택에 각 숫자의 인덱스(i)를 넣고, 다음 숫자가 이 숫자보다 클 때까지 배열을 확인한다
-            // [3 5 2 7]
-            // 3 을 스택에 넣고 ( stack = 0 ), i = 0
-            // 5 >> i = 1 , 스택이 비어있지 않고(stack = 0 ), arr[0] < arr[1] 이므로 arr[0] 을 arr[1] 값으로 변경
-            //      stack 에 1을 넣는다 ( stack = 1)
-            // 2 >> i = 2, 스택은 비어있지 않지만, arr[1] > arr[2] 이므로 while 은 넘어가고, 스택에 2 를 넣는다
-            //      stack = 1, 2
-            // 7 >> i = 3, 스택은 비어있지 않고, arr[1] < arr[3] , arr[2] < arr[3] 이므로
-            //      arr[1], arr[2] = arr[3] 으로 변경, stack 에 3 을 넣는다
-            // 모든 수열 확인 했으므로 반복 종료
+            // 스택이 비어있지 않고, 스택 안, 인덱스의 숫자가 i 인덱스의 숫자보다 작을 때
+            // 결과 배열에 해당 i 인덱스의 값으로 변경
             while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
-                arr[stack.pop()] = arr[i];
+                res[stack.pop()] = arr[i];
             }
+            // 인덱스를 넣는다
             stack.push(i);
         }
 
-        // 스택에 남아 있다는 뜻은 해당 인덱스의 숫자보다 큰 숫자가 없다는 뜻이므로, -1 로 값 변경
-        while (!stack.isEmpty()) {
-            arr[stack.pop()] = -1;
-        }
-        // 출력
         for (int i = 0; i < n; i++) {
-            sb.append(arr[i]).append(" ");
+            sb.append(res[i]).append(" ");
         }
 
         bw.write(sb.toString());
