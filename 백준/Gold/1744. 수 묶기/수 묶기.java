@@ -8,8 +8,17 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         // 양수는 최대한 큰 값을 묶어야 하기 때문에 내림차순으로
         PriorityQueue<Integer> plus = new PriorityQueue<>(Collections.reverseOrder()); // 양수
-        PriorityQueue<Integer> minus = new PriorityQueue<>(); // 음수는 최대한 작게 만들어야 하기 때문에 오름차순으로
-
+        // 음수는 최대한 작게 만들어야 하기 때문에 오름차순으로
+        PriorityQueue<Integer> minus = new PriorityQueue<>(); 
+        
+        // 우선순위 큐를 사용하여 양수, 음수를 나누어 저장한 후
+        // 양수는 큰 값으로 만들기 위해 내림차순 정렬 입력
+        // 음수는 작은 값으로 만들기 위해 오름차순 정렬 입력
+        // 각 우선순위 큐는 계산할 때, 
+        // 양수의 경우 >> 서로 묶어주는 것이 더 커지지만, 만약 묶는 값 중 하나라도 1이라면
+        //              오히려 손해이므로 그냥 더한다
+        // 음수의 경우 >> 절대 값이 큰 값 끼리 묶어서 음수 * 음수 = 양수로 만들어 더한다
+        //              작은 값들은 그냥 더한다
         int n = Integer.parseInt(br.readLine()); // 수의 개수
 
         while (n-- > 0) {
