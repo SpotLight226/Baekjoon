@@ -31,10 +31,14 @@ public class Main {
             // o1 과 o2 의 hashMap 의 빈도 (value) 를 비교해서 다르다면,
             // 빈도로 비교
             if (Integer.compare(hashMap.get(o1), hashMap.get(o2)) != 0) {
+                // 빈도를 기준으로 내림차순 정렬
                 return Integer.compare(hashMap.get(o2), hashMap.get(o1));
             }
             // 문장의 길이로 비교
             if (o1.length() != o2.length()) {
+                // 길이로 비교
+                // 양수라면, o2 가 앞으로 ( o2 더 김 )
+                // 음수라면, o1 가 앞으로 ( o1 더 김 )
                 return o2.length() - o1.length();
             }
             // 사전 순으로 비교
