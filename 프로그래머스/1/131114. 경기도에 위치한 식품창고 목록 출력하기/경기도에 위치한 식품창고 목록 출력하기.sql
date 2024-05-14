@@ -1,0 +1,7 @@
+SELECT WAREHOUSE_ID, -- 창고 ID
+       WAREHOUSE_NAME, -- 이름
+       ADDRESS, -- 주소
+       IFNULL(FREEZER_YN, 'N') AS FREEZER_YN -- IFNULL(컬럼, NULL 대신 표시할 값)
+FROM FOOD_WAREHOUSE
+WHERE ADDRESS LIKE '경기%' -- 주소가 경기~ 로 시작하는 것만
+ORDER BY WAREHOUSE_ID -- ID 오름차순 정렬
