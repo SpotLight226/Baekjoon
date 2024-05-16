@@ -1,8 +1,8 @@
--- 코드를 입력하세요
-SELECT outs.animal_id
-     , outs.name
-FROM animal_outs AS outs
-    LEFT JOIN animal_ins AS ins
-    ON outs.animal_id = ins.animal_id
-WHERE ins.animal_id IS NULL    
-ORDER BY outs.animal_id
+SELECT OUTS.ANIMAL_ID,
+       OUTS.NAME
+FROM ANIMAL_OUTS AS OUTS -- 보호소 들어온 기록이 없어야 하므로 OUT에서
+LEFT JOIN ANIMAL_INS AS INS -- LEFT JOIN 해서 해당되는 외래키가 있다면 그 값을 붙이고, 없다면 NULL
+    ON OUTS.ANIMAL_ID = INS.ANIMAL_ID
+WHERE INS.ANIMAL_ID IS NULL -- 만약 INS에 ID가 NULL이라면
+ORDER BY OUTS.ANIMAL_ID -- ID순으로
+
