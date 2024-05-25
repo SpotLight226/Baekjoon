@@ -1,0 +1,8 @@
+SELECT P.ID, -- 부모 ID
+       COUNT(C.ID) AS CHILD_COUNT -- LEFT JOIN했을 때, CHILD의 개수
+FROM ECOLI_DATA AS P
+LEFT JOIN ECOLI_DATA AS C -- 일반 JOIN시 NULL이 아닌 것은 안나오는데 LEFT JOIN으로 만약 JOIN할 것이
+    ON P.ID = C.PARENT_ID -- 없을 때는 NULL로 표시되게 된다
+GROUP BY P.ID -- 부모의 ID로 GROUP하여 COUNT를 셀 수 있게 한다
+ORDER BY P.ID
+
