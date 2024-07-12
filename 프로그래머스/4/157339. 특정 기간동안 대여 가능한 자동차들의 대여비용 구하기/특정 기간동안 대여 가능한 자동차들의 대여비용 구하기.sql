@@ -1,0 +1,34 @@
+WITH ABLES AS (
+               SELECT CAR_ID
+               FROM CAR_RENTAL_COMPANY_CAR AS CARS
+               WHERE CAR_TYPE IN ('SUV', '세단')
+                 AND NOT EXISTS (SELECT CAR_ID
+                                 FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY AS HIS
+                                 WHERE HIS.CAR_ID = CARS.CAR_ID
+                                   AND HIS.START_DATE <= '2022-11-30'
+                                   AND HIS.END_DATE >= '2022-11-01')
+              ),
+
+DIS AS (
+        SELECT CAR_TYPE, DISCOUNT_RATE
+        FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+        WHERE DURATION_TYPE = '30일 이상'
+       )
+
+SELECT 
+    AB.CAR_ID,
+    CARS.CAR_TYPE,
+    ROUND(CARS.DAILY_FEE * (1 - DIS.DISCOUNT_RATE * 0.01) * 30, 0) AS FEE
+FROM 
+    ABLES AS AB
+JOIN 
+    CAR_RENTAL_COMPANY_CAR AS CARS ON AB.CAR_ID = CARS.CAR_ID
+JOIN 
+    DIS ON CARS.CAR_TYPE = DIS.CAR_TYPE
+WHERE 
+    ROUND(CARS.DAILY_FEE * (1 - DIS.DISCOUNT_RATE * 0.01) * 30, 0) >= 500000
+    AND ROUND(CARS.DAILY_FEE * (1 - DIS.DISCOUNT_RATE * 0.01) * 30, 0) < 2000000
+ORDER BY 
+    FEE DESC,
+    CARS.CAR_TYPE,
+    AB.CAR_ID DESC;
