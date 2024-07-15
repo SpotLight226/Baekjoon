@@ -18,8 +18,8 @@ WITH TRUCKS_HISTORY AS (SELECT HIS.HISTORY_ID, -- 대여 기록 ID
                               WHERE CAR_TYPE = '트럭') -- CAR_TYPE이 트럭인 것만
 
 SELECT TH.HISTORY_ID,
-       CASE IFNULL(TH.DURATION_TYPE, 0) -- 각 기간 종류에 따라 요금 계산
-            WHEN 0 -- 기간 종류 없으면 그냥 계산
+       CASE -- 각 기간 종류에 따라 요금 계산
+            WHEN TH.DURATION_TYPE IS NULL -- 기간 종류 없으면 그냥 계산
             THEN TH.DAILY_FEE * TH.RENTAL
             -- 각 종류에 따라 요금 계산
             WHEN '7일 이상' THEN ROUND(TH.DAILY_FEE * TH.RENTAL * (1 - DIS.DISCOUNT_RATE * 0.01), 0)
