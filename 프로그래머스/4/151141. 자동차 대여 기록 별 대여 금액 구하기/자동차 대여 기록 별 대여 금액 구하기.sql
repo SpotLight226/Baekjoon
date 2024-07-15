@@ -18,10 +18,11 @@ WITH TRUCKS_HISTORY AS (SELECT HIS.HISTORY_ID, -- 대여 기록 ID
                               WHERE CAR_TYPE = '트럭') -- CAR_TYPE이 트럭인 것만
 
 SELECT TH.HISTORY_ID,
+       -- CASE 구문은 단순한 형태에서는 뒤에 조건을 비교할 열이름이나 식을 적고 WHEN절에 해당 조건이 TRUE일때 실행 코드 작성
+       -- 조건 형태에서는 각 WHEN 절에서 바로 조건을 비교하게 작성 가능
+       -- IFNULL 이용시 CASE IFNULL(TH.DURATION_TYPE, 0)
        CASE -- 각 기간 종류에 따라 요금 계산
-            WHEN TH.DURATION_TYPE IS NULL -- 기간 종류 없으면 그냥 계산
-            THEN TH.DAILY_FEE * TH.RENTAL
-            -- 각 종류에 따라 요금 계산
+            WHEN TH.DURATION_TYPE IS NULL THEN TH.DAILY_FEE * TH.RENTAL -- NULL 이용시
             WHEN '7일 이상' THEN ROUND(TH.DAILY_FEE * TH.RENTAL * (1 - DIS.DISCOUNT_RATE * 0.01), 0)
             WHEN '30일 이상' THEN ROUND(TH.DAILY_FEE * TH.RENTAL * (1 - DIS.DISCOUNT_RATE * 0.01), 0)
             ELSE ROUND(TH.DAILY_FEE * TH.RENTAL * (1 - DIS.DISCOUNT_RATE * 0.01), 0) -- 90일 이상
