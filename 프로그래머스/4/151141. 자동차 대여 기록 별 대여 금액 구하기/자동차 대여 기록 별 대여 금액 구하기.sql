@@ -7,7 +7,7 @@ WITH TRUCKS_HISTORY AS (SELECT HIS.HISTORY_ID, -- 대여 기록 ID
                                     WHEN HIS.RENTAL >= 90 THEN '90일 이상'
                                     WHEN HIS.RENTAL >= 30 THEN '30일 이상'
                                     WHEN HIS.RENTAL >= 7 THEN '7일 이상'
-                                    ELSE 0 
+                                    ELSE NULL 
                                END AS DURATION_TYPE -- 대여 기간 종류
                         FROM (SELECT HISTORY_ID,
                                      CAR_ID,
@@ -18,7 +18,7 @@ WITH TRUCKS_HISTORY AS (SELECT HIS.HISTORY_ID, -- 대여 기록 ID
                               WHERE CAR_TYPE = '트럭') -- CAR_TYPE이 트럭인 것만
 
 SELECT TH.HISTORY_ID,
-       CASE TH.DURATION_TYPE -- 각 기간 종류에 따라 요금 계산
+       CASE IFNULL(TH.DURATION_TYPE, 0) -- 각 기간 종류에 따라 요금 계산
             WHEN 0 -- 기간 종류 없으면 그냥 계산
             THEN TH.DAILY_FEE * TH.RENTAL
             -- 각 종류에 따라 요금 계산
