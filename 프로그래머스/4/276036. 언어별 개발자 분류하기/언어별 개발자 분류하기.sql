@@ -1,6 +1,7 @@
 -- 개발자와 스킬코드를 JOIN해서 PYTHON, C#, FRONTEND의 기술을 각 사람마다 표기
 WITH SKILLS AS (SELECT D.ID,
                        D.EMAIL,
+                       -- 각 개발자에 대해 하나의 행으로 결과를 그룹화하기 위해서 각 행을 MAX로
                        MAX(CASE WHEN S.NAME = 'Python' THEN 1 ELSE 0 END) AS PYTHON_YN,
                        MAX(CASE WHEN S.NAME = 'C#' THEN 1 ELSE 0 END) AS CSHAP_YN,
                        MAX(CASE WHEN S.CATEGORY = 'Front End' THEN 1 ELSE 0 END) AS FRONT_YN
