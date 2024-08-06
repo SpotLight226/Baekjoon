@@ -1,6 +1,7 @@
 import java.util.*;
 class Solution {
     public int solution(String before, String after) {
+        /*
         HashMap<Character, Integer> beforeHash = new HashMap<>(); // before의 해쉬 맵
         HashMap<Character, Integer> afterHash = new HashMap<>(); // after의 해쉬 맵
 
@@ -25,5 +26,15 @@ class Solution {
         }
         // check 가 true 면 1, false 면 0 반환
         return check ? 1 : 0;
+        */
+        
+        // 배열로 만들어 정렬 후 같은지 비교하여 푸는 방식
+        char[] beforeArr = before.toCharArray();
+        char[] afterArr = after.toCharArray();
+        
+        Arrays.sort(beforeArr);
+        Arrays.sort(afterArr);
+        // 각 배열을 String 객체로 만든 후 같은지 비교하여 1 또는 0 반환
+        return new String(beforeArr).equals(new String(afterArr)) ? 1 : 0;
     }
 }
