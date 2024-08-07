@@ -1,5 +1,6 @@
 class Solution {
     public int solution(int[][] dots) {
+        // 직사각형 넓이 구하려면 X, Y의 최대, 최소값을 찾아 가로 세로 길이 계산하면 됨
         int minX = Integer.MAX_VALUE; // 가장 작은 x좌표
         int maxX = Integer.MIN_VALUE; // 가장 큰 x좌표
         int minY = Integer.MAX_VALUE; // 가장 작은 y좌표
